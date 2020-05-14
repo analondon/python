@@ -1,0 +1,47 @@
+#IMPORTING MODULES
+
+import my_module as mm #renames and imports the module
+index = mmodule.find_index(list, 'arg')
+or
+from my_module import find_index as findex
+index = findex(list, 'arg') #only imports this function from the module
+
+import sys
+print(sys.path) #to check which folder the module came from
+
+sys.path.append('/Users/Ana Zampa/Desktop/......') #to add a file with a module onto sys.path so you can import it if in different location
+
+import random
+courses = ['Maths', 'English', 'Coding', 'Physics', 'Biology', 'Geography', 'History']
+course = random.choice(courses)
+course
+'Physics'
+course = random.choice(courses)
+course
+'Biology'
+course = random.choice(courses)
+course
+'English'
+
+import math
+
+import datetime
+today = datetime.date.today()
+today
+2019-11-11
+
+import calendar
+print(calendar.isleap(1979))
+
+import os #to navigate system and change file names etc
+
+import webbrowser
+webbrowser.open('http://website.xxx') #will open the website on your browser
+
+import hashlib
+
+from lxml import html
+
+import requests
+
+  
