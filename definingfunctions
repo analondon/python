@@ -1,0 +1,40 @@
+#functions
+def solve() :
+    return "".join(sorted(set(s.upper().replace(' ', ''))))
+
+s = input('Enter your full name: ')
+print(solve(s))
+
+def response(arg):
+    res = 'My name is {fn} {ln} and I live in {city}'.format_map(par)
+    return res
+#this function will take any dictionary name as an argument
+
+par = {'fn': 'Ana', 'ln': 'Zampa', 'city': 'London'}
+response(par)
+'My name is Ana Zampa and I live in London'
+
+def hello_function(greeting, name='You') :
+    return '{}, {}'.format(greeting,name)
+
+user_name = input('Please enter you name: ')
+Please enter you name:Ana
+print(hello_function('Hello',name = user_name))
+Hello, Ana
+
+def emp_info(*args, **kwargs):
+    print(args)
+    print(kwargs)
+
+emp_info('manager', '101', name='John', age=30, city='London')
+('manager', '101') #args
+{'name': 'John', 'age': 30, 'city': 'London'} #kwargs
+
+def emp_info(*args, **kwargs):
+    print(args, kwargs)
+
+role = ['manager', '101']
+p_info = {'name': 'John', 'age': 30, 'city': 'London'}
+
+emp_info(*role, **p_info)
+('manager', '101') {'name': 'John', 'age': 30, 'city': 'London'}
