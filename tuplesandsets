@@ -1,0 +1,92 @@
+#TUPLES
+z = () #many ways to create a TUPLE
+type(z)
+<class 'tuple'>
+z = (1, 2)
+type(z)
+<class 'tuple'>
+z = 1,
+type(z)
+<class 'tuple'>
+
+list = [4, 9, 16]
+z = tuple(list) #creates a tuple from a list
+z
+(4, 9, 16)
+#tuple: immutable. You can only use count and index methods on them
+# you can use functions: sorted, reversed, for, in (check membership), len, max, min
+
+
+
+#SETS
+
+c = {1, 1, 1, 6, 7, 9}
+c = {1, 6, 7, 9} #removes duplicates
+a = {2, 3, 4, 5, 6, 1, 1, 7, 1, 9, 6}
+print(c.intersection(a)) #set method
+{1, 7, 9, 6}
+
+empty_set = set() #correct
+new_set = {1, 2} #correct
+list = [4, 9, 16]
+new_set = set(list) #creates a set from a list
+new_set
+{16, 9, 4}
+empty_set = {} #INCORRECT: this creates a dictionary
+
+new_set.add(24)
+new_set
+{16, 9, 4, 24}
+
+new_set.add(9)
+new_set
+{16, 9, 4, 24} #9 already in the set so no charges made
+
+set2 = {3, 19, 7, 15}
+new_set.update(set2) #use method update to add a set to another
+new_set
+{3, 4, 7, 9, 15, 16, 19, 24}
+
+
+z = {3*n for n in range(10) if n > 5} #set comprehension
+z
+{24, 18, 27, 21}
+
+z.add(30)
+z
+{18, 21, 24, 27, 30}
+
+z.remove(18)
+z
+{21, 24, 27, 30}
+
+len(z)
+4
+
+z.pop() #removes and returns a random item from the list
+21
+z
+{24, 27, 30}
+
+z.clear()
+z
+set()
+
+a = {1, 2, 3, 4}
+b = {4, 5, 6}
+c = a & b
+c
+{4}
+d = a | b
+d
+{1, 2, 3, 4, 5, 6}
+e = a ^ b
+e
+{1, 2, 3, 5, 6}
+f = a - b
+f
+{1, 2, 3}
+g = f <= d
+g
+True
+
