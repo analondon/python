@@ -1,0 +1,236 @@
+#Strings
+
+mes = "Bobby's world"
+or
+mes = 'Bobby\'s world'
+
+#Bobby's world 
+
+leap_year = year % 4 == 0 (year % 100 != 0 or year % 400 == 0)
+
+mes = """Bobby's world
+... was a cartoon"""
+
+Bobby's world
+was a cartoon
+
+item % 2 == 0 #to find even numbers
+
+print(len(mes))
+print(mes[14])
+print(mes[:12])
+print(mes[0:12])
+print(mes[12:])
+print(mes.lower())
+print(mes.upper())
+print(mes.capitalize())
+print(mes.count('d'))
+print(mes.find('db'))
+newmes = mes.replace('d', 'v')
+a = 'Hello'
+b = 'Dear'
+c = 'guest'
+d = 'Welcome'
+e = 'to our'
+f = 'home'
+g = 'Thank you'
+mes = '{}, {} {}. {} {} {}. {}'.format(a,b,c,d,e,f,g)
+or
+mes = f'{a}, {b} {c}. {d} {e} {f}. {g}.'
+or
+mes = '{0}, {1} {2}. {3} {4} {5}. {6}.'.format('Hello', 'dear', 'guest', 'welcome', 'to our', 'home', 'thank you')
+print(mes) #Hello, Dear guest. Welcome to our home. Thank you.
+
+mes = f'{a}, {b.lower()} {c.capitalize()}. {d.lower()} {e.istitle()} {f.casefold()}. {g}.'
+
+a = ' '.join(('This','is','a','string'))
+print(a)
+This is a string
+' - '.join('Mississipi')
+'M - i - s - s - i - s - s - i - p - i'
+' - '.join('123356789')
+'1 - 2 - 3 - 3 - 5 - 6 - 7 - 8 - 9'
+' - '.join(('This','is'))
+'This - is'
+
+sep = ' '
+a = 'This'
+b = 'is'
+c = 'a'
+d = 'string'
+obj = [a,b,c,d]
+sep.join(obj)
+'This is a string'
+obj2 = [a,d]
+sep.join(obj2)
+'This string'
+
+a = 'cØde'
+b = a.encode()
+print(b)
+b'c\xc3\x98de'
+print(a)
+cØde
+
+c = b.decode()
+print(c)
+cØde
+print(b)
+b'c\xc3\x98de'
+
+d = a.encode('ascii', 'ignore')
+print(d)
+b'cde'
+
+d = a.encode('ascii', 'replace')
+print(d)
+b'c?de'
+
+e = a.encode('ascii', 'xmlcharrefreplace')
+print(e)
+b'c&#216;de'
+
+ g = 'this is a string in python'
+h = g.swapcase()
+print(h)
+
+THIS IS A STRING IN PYTHON
+g = 'thIS is A string in pyTHon'
+h = g.swapcase()
+print(h)
+THis IS a STRING IN PythON
+
+g = 'this is a string in python'.islower()
+print(g)
+True
+'this is a string in python'.islower()
+True
+
+g = 'this is a string in python'.count('i')
+print(g)
+4
+
+g = 'this is a string in python'
+g.count('i')
+4
+g.count()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: count() takes at least 1 argument (0 given)
+
+a = 'this is a string'
+a.split()
+['this', 'is', 'a', 'string']
+
+a = 'this, is, a, string'
+a.split(', ')
+['this', 'is', 'a', 'string']
+
+a = 'this-is-a-string'
+a.split('-')
+['this', 'is', 'a', 'string']
+
+a = 'this-is-a-string'
+a.split('-', 2)
+['this', 'is', 'a-string']
+
+a.splitlines(keepends=True) #doesn't touch the space in the middle (only splits new lines) and if the arg is added, leaves the end of the line as well
+
+user = input('What is your name? ')
+message = 'Hello, {} How are you today?'.format(user)
+print(message)
+
+a = 'this is a string'
+a.rpartition('i')
+('this is a str', 'i', 'ng')
+
+a.partition('i') #there is no such a thing as lpartition
+('th', 'i', 's is a string')
+
+isupper, islower, isnumeric, isascii, isdigit, isalpha, isalnum returns a boolean (True/False)
+#'space' is not alphanumeric
+
+a = 'this is \n a string'
+a.splitlines()
+['this is ', ' a string']
+a.splitlines(keepends=True) #or just (True)
+['this is \n', ' a string']
+
+
+The splitlines() splits on the following line boundaries:
+Representation	Description
+\n          	Line Feed
+\r	            Carriage Return
+\r\n	        Carriage Return + Line Feed
+\v or \x0b	    Line Tabulation
+\f or \x0c	    Form Feed
+\x1c        	File Separator
+\x1d        	Group Separator
+\x1e        	Record Separator
+\x85        	Next Line (C1 Control Code)
+\u2028	        Line Separator
+\u2029      	Paragraph Separator
+
+s = 'dhd jshd'
+d = str.maketrans('dh', 'ao')
+
+s.translate(d)
+'aoa jsoa'
+
+d = str.maketrans({'d': 'a', 'h': 'o'})
+
+d = str.maketrans('dh', 'ao', 'j') #this will remove 'J'
+s.translate(d)
+'aoa soa'
+
+d = {'Ana': 1000, 'Michael': 10, 'Carola': 1, 'John': 100}
+for key, value in d.items() :
+    print(f'{key.ljust(10)}{value}')
+
+Ana            1000
+Michael        10
+Carola         1
+John           100
+
+for key, value in d.items():
+    print(f'{key.upper().ljust(20,".")}: £{value}')
+ANA.................: £1000
+MICHAEL.............: £10
+CAROLa..............: £1
+JOHN................: £100
+
+# the tab \t equals to 8 characters
+for key, value in d.items():
+    print(f'{key}\t\t£ {value}')
+Ana             £ 1000
+Michael         £ 10
+Carola          £ 1
+John            £ 100
+
+s = '1234567890'
+r = '12345.67890'
+s.zfill(20)
+'00000000001234567890'
+r.zfill(20)
+'00000000012345.67890'
+s.rjust(20, '0')
+'00000000001234567890'
+r.rjust(20, '0')
+'00000000012345.67890'
+
+a = 'New string'
+b = 'This is a n'
+c = b + a[1:]
+print(c)
+This is a new string
+
+a = 'New string'
+a[::3]
+'N rg'
+
+a[::-1]
+'gnirts weN'
+
+a[-1:4:-1]
+'gnirt'
+
