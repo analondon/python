@@ -66,5 +66,8 @@ while x > 0:
     n -= 1
     print(x)
 
+def func():
+    #do something
+    
 while True:
-    [do something]
+    func()
