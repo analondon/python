@@ -1,0 +1,169 @@
+#dictionaries
+
+x = {} #creates an empty dictionary
+or
+x = dict()
+or
+x = {'pork': 25.3, 'beef': 33.8, 'chicken': 22.7}
+or
+x = dict([('pork', 25.3),('beef', 33.8),('chicken', 22.7)])
+x
+{'pork': 25.3, 'beef': 33.8, 'chicken': 22.7}
+or
+x = dict(pork=25.3,beef=33.8,chicken=22.7)
+x
+{'pork': 25.3, 'beef': 33.8, 'chicken': 22.7}
+x['beef'] = 31.5 #it updates the value if already there or add if not in dict yet
+x
+{'pork': 25.3, 'beef': 31.5, 'chicken': 22.7}
+del x['pork']
+x
+{'beef': 31.5, 'chicken': 22.7}
+'beef' in x #looks at key, not values
+True
+'pork' in x
+False
+len(x)
+2
+z = x.copy() #creates a new dict with the same values
+x.clear()
+x
+{}
+del x
+x
+Traceback.......name 'x' is not defined
+
+x = dict.fromkeys(['pork', 'beef', 'chicken'])
+x
+{'pork': None, 'beef': None, 'chicken': None}
+or
+x = dict.fromkeys(['pork', 'beef', 'chicken'], 0)
+{'pork': 0, 'beef': 0, 'chicken': 0}
+
+x.setdefault('beef', 29.5) #will add to the dictionery if not there yet and ignore if alread there (it will not update)
+28.8
+x
+{'pork': 25.7, 'beef': 28.8, 'fish': 35.8, 'chicken': 23.2}
+x = {'pork': 25.3, 'beef': 33.8, 'chicken': 22.7}
+
+x = {'pork': 25.7, 'beef': 28.8, 'fish': 35.8}
+d = {'chicken': 23.2, 'sausages': 19.5, 'turkey': 26.6}
+d.update(x) #add x onto d
+d
+{'chicken': 23.2, 'sausages': 19.5, 'turkey': 26.6, 'pork': 25.7, 'beef': 28.8, 'fish': 35.8}
+x
+{'pork': 25.7, 'beef': 28.8, 'fish': 35.8}
+
+x.keys()
+dict_keys(['pork', 'beef', 'chicken'])
+y = list(x.keys())
+y
+['pork', 'beef', 'fish'] #creates a list and drops the dict_keys variable. Same works for the values and items
+
+x.values()
+dict_values([25.3, 33.8, 22.7])
+y = list(x.values())
+y
+[25.7, 28.8, 35.8]
+
+x.items()
+dict_items([('pork', 25.3), ('beef', 33.8), ('chicken', 22.7)])
+y = list(x.items())
+y
+[('pork', 25.7), ('beef', 28.8), ('fish', 35.8)]
+
+for k,v in x.items() :
+    print(k,v)
+pork 25.3
+beef 33.8
+chicken 22.7
+'pork' in x.values()
+False
+'pork' in x.keys()
+True
+('pork', 25.3) in x.items()
+True
+
+student = {'name': 'John', 'age': 25, 'courses':['Math', 'English', 'CompSci']}
+print(student.get('name'))
+John
+print(student.get('phone'))
+None
+print(student.get('phone', 'Not found'))
+Not found
+student['phone'] = '555-555'
+print(student.get('phone', 'Not found'))
+555-555
+age = student.pop('age')
+student
+{'name': 'John', 'courses': ['Math', 'English', 'CompSci'], 'phone': '555-555'}
+age
+25
+any_item = student.popitem() #remove and return a random k,v pair
+any_item
+('phone', '555-555')
+student
+{'name': 'John', 'courses': ['Math', 'English', 'CompSci']}
+
+print(len(student))
+2
+
+for key in student.items() : #prints tuples
+   print(key)
+('name', 'John')
+('courses', ['Math', 'English', 'CompSci'])
+('phone', '555-555')
+for value in student.items() : #prints the same??
+    print(value)
+('name', 'John')
+('courses', ['Math', 'English', 'CompSci'])
+('phone', '555-555')
+
+for k, v in student.items() :
+    print(v, k)
+John name
+['Math', 'English', 'CompSci'] courses
+555-555 phone
+for value in student.values() :
+    print(value)
+John
+['Math', 'English', 'CompSci']
+555-555
+for key in student.keys() :
+   print(key)
+name
+courses
+phone
+
+d = {'Open':90, 'High':95}
+d.setdefault('Low', 100)
+d
+{'Open': 90, 'High': 95, 'Low': 100} #k,v pair added to dict
+d.setdefault('High', 98)
+95
+d
+{'Open': 90, 'High': 95, 'Low': 100} #it doesn't change the value if already in dict
+
+#A list of dicts will become a dict of lists
+animals = [
+{'type' : 'dog', 'breed' : 'German Shepard'},
+{'type' : 'cat', 'breed' : 'Siamese'},
+{'type' : 'horse', 'breed' : 'Thoroughbred'},
+{'type' : 'dog', 'breed' : 'Boxer'},
+{'type' : 'dog', 'breed' : 'Bulldog'},
+{'type' : 'horse', 'breed' : 'Arabian'},
+{'type' : 'cat', 'breed' : 'Sphynx'},
+{'type' : 'cat', 'breed' : 'Persian'},
+{'type' : 'horse', 'breed' : 'Mustang'}
+]
+
+animal_dict = {}
+
+for animal in animals :
+    #if animal['type'] in animal_dict :
+        #animal_dict[animal['type']].append(animal['breed'])
+    #else:
+        #animal_dict[animal['type']] = [animal['breed']]
+    animal_dict.setdefault(animal['type'], []).append(animal['breed'])
+
+print(animal_dict)
