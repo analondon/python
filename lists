@@ -1,0 +1,161 @@
+#LISTS
+
+c = [1, 1, 2, 6, 1, 7, 1, 9, 6]
+c.remove(1) #removes the value informed as argument
+c
+[1, 2, 6, 1, 7, 1, 9, 6]
+
+c = [1, 1, 2, 6, 1, 7, 1, 9, 6]
+c.pop(2) # uses index to remove the value
+2
+c.pop(2)
+6
+c.pop(2)
+c
+[1, 1, 7, 1, 9, 6]
+
+c = [1, 1, 7, 1, 9, 6]
+c.append(5)
+c
+[1, 1, 7, 1, 9, 6, 5] #adds the new item to the end of the list
+
+a = [2, 3, 4, 5, 6]
+c.append(a)
+[1, [2, 3, 4, 5, 6], 1, 7, 1, 9, 6] #the items are added as a list
+
+c.insert(4, 8) #it also takes an index as an argument, allowong you to choose where the new item goes
+c
+[1, [2, 3, 4, 5, 6], 1, 7, 8, 1, 9, 6]
+
+c = [1, 1, 7, 1, 9, 6]
+a = [2, 3, 4, 5, 6]
+a.extend(c)
+a
+[2, 3, 4, 5, 6, 1, 1, 7, 1, 9, 6]
+
+ a = [2, 3, 4, 5, 6]
+ a.clear()
+a
+[]
+or
+del a[:] #del takes no arguments
+a
+[]
+
+animals = ['cat', 'dog', 'monkey', 'bird']
+animals
+['cat', 'dog', 'monkey', 'bird']
+animals.index('bird') #case sensitive
+3
+
+c = [1, 2, 3, 4, 5, 6, 1, 7, 8, 1, 9, 6]
+c.count(1) #takes exactly one argument
+3
+sum(c)
+53
+min(c)
+1
+max(c)
+9
+sorted(c) #function
+[1, 1, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9] #does not change the original list
+c.sort() #method
+c
+[1, 1, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9] #changes the original list
+sorted(c,reverse=True) #function
+[9, 8, 7, 6, 6, 5, 4, 3, 2, 1, 1, 1] #does not change the original list
+c.sort(reverse=True) #method
+c
+[9, 8, 7, 6, 6, 5, 4, 3, 2, 1, 1, 1] #changes the original list
+sorted(c,key=abs) #ignores negative and order by absolute value
+c
+[1, 1, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9]
+
+animals = ['cat', 'dog', 'monkey', 'bird']
+a, b, c, d = animals
+a
+'cat'
+b
+'dog'
+c
+'monkey'
+d
+'bird'
+
+animals = ['cat', 'dog', 'monkey', 'bird']
+animals.reverse()
+animals
+['bird', 'monkey', 'dog', 'cat']
+
+animals = ['cat', 'dog', 'monkey', 'bird']
+animals2 = animals.copy()
+animals2
+['cat', 'dog', 'monkey', 'bird']
+
+animals3 = animals[:2].copy() #accepts slicing
+animals3
+['cat', 'dog']
+
+animals = ['cat', 'dog', 'monkey', 'bird']
+animals.sort() #alters the list (does not create a new one) and can take reverse=True as an argiment to sort in decrescent order
+animals
+['bird', 'cat', 'dog', 'monkey']
+
+animals = ['cat', 'dog', 'monkey', 'bird']
+my_story = 'I have a {my_animal} and a {other_animal}. I\'d love to have a {wild_animal}, except a {no_animal}'
+b.format(my_animal=animals[0], other_animal=animals[1],wild_animal=animals[2], no_animal=animals[3])
+"I have a cat and a dog. I'd love to have a monkey, but not a bird"
+
+animals = ['cat', 'dog', 'monkey', 'bird']
+for index, item in enumerate(animals) :
+    print(index, item)
+0 cat
+1 dog
+2 monkey
+3 bird
+
+
+animals[:] #slicing works just as with strings
+
+animals[-1:1:-1] #from end to beguinning of the list
+['bird', 'monkey']
+
+x = [m**2 for m in range(5) if m > 1] #list comprehension
+[4, 9, 16]
+
+l = [1, 2, 3, 4, 5]
+l = [i * 10 for i in l]
+l
+[10, 20, 30, 40, 50]
+k = ['dog', 'cat', 'bird']
+k = [g + 's' for g in k]
+k
+['dogs', 'cats', 'birds']
+
+m = [item.title() for item in k]
+m
+['Dog', 'Cat', 'Bird']
+
+l = [1, 2, 3, 4, 5, 6]
+even = []
+even1 = [even.append(item) for item in l if item % 2 == 0]
+even
+[2, 4, 6]
+even1
+[None, None, None]
+
+play = []
+calc = [play.append(a + b) for a in l for b in even]
+play
+[3, 5, 7, 4, 6, 8, 5, 7, 9, 6, 8, 10, 7, 9, 11, 8, 10, 12]
+
+play.reverse() #method - changes the list and returns None
+play
+[12, 10, 8, 11, 9, 7, 10, 8, 6, 9, 7, 5, 8, 6, 4, 7, 5, 3]
+
+play = [3, 5, 7, 4, 6, 8, 5, 7, 9, 6, 8, 10, 7, 9, 11, 8, 10, 12]
+play 2 = (list(reversed(play))) #function - returns the result on a new list
+play 2
+[12, 10, 8, 11, 9, 7, 10, 8, 6, 9, 7, 5, 8, 6, 4, 7, 5, 3]
+
+
