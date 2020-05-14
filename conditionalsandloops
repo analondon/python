@@ -60,3 +60,11 @@ r
 i
 n
 g
+
+x = 6
+while x > 0:
+    n -= 1
+    print(x)
+
+while True:
+    [do something]
