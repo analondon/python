@@ -1,0 +1,96 @@
+import msvcrt as m
+import re
+
+def wait():
+    m.getch()
+
+def main_menu():
+    print("""
+    Welcome to Split-It
+
+            About            (A)
+            Create Project   (C)
+            Enter Votes      (V)
+            Show Project     (S)
+            Quit             (Q)
+
+        """
+      )
+
+
+def actioninput():
+    actioninput.action = input('            Please choose an option and press <Enter>: ').upper();
+
+def func_a():
+    print('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+
+def func_c():
+    while True:
+        action_c = input('    Enter the project name: ')
+        if not re.match('[a-zA-Z]', action_c):
+            print('Name must be a string')
+            continue
+        else:
+            break
+
+    while True:
+        action_number = input('Enter the number of team members: ')
+        if not re.match('[0-9]', action_number):
+            print('<ERROR> It must be a number greater than 0')
+            continue
+        else:
+            if int(action_number) > 0:
+                action_number = int(action_number)
+                break
+
+    member_number = 0
+    members_name = []
+    while action_number > 0:
+        action_number -= 1
+        member_number += 1
+        while True:
+            member_name = input(f'Enter the name of team member {member_number}: ')
+            if not re.match('[a-zA-Z]', member_name):
+                print('Please enter a valid name')
+                continue
+            else:
+                members_name.append(member_name)
+                break
+
+        for name in members_name:
+            sentense_names = "\n".join(members_name)
+
+    team_data = f'The Project name is: {action_c}'"""
+"""f'There are {member_number} members in the group and they are:'"""
+"""f'{sentense_names}'
+    print(team_data)
+    print(input('Press <Enter> to return to the main menu: ', ));
+    wait()
+
+def func_error():
+    print('<ERROR>');
+
+def condfun():
+    if actioninput.action == 'A' :
+        func_a()
+
+    elif actioninput.action == 'C' :
+        func_c()
+
+    elif actioninput.action == 'V':
+        pass
+
+    elif actioninput.action == 'S':
+        pass
+
+    elif actioninput.action == 'Q':
+        exit()
+
+    else:
+        func_error()
+        pass
+
+while True:
+    main_menu()
+    actioninput()
+    condfun()
