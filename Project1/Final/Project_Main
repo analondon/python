@@ -44,7 +44,6 @@ def condfun():
         Utils.func_error()
         pass
 
-# __name = main
 while True:
     main_menu()
     actioninput()
