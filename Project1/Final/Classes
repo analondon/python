@@ -1,17 +1,27 @@
-import msvcrt as m
+# instance.method()
+# or
+# Class.method(instance)
+
 import os
 import re
 import Utils
 
-#parent
-class Project():
 
+#parent
+class Project:
+
+    @classmethod
+    def set_project(cls):
+        cls.get_project()
+        Person.get_members_names()
+        with open('all_projects.txt', 'a+') as fhandle:
+            fhandle.write(project_name + ',' + str(number_of_members) + ',' + members_names + ',')
+
+    @staticmethod
     def lookup_project(projectnamegiven):
         global projectfound
         global words
-        global listofnames
         global wholeline
-        listofnames = []
         projectfound = None
         with open('all_projects.txt', 'r+') as fhandle:
             lines = fhandle.readlines()
@@ -25,131 +35,119 @@ class Project():
                         continue
                     elif projectnamegiven == words[0]:
                         projectfound = True
-                        findlastmember = 1 + int(words[1])
-                        listofnames = words[2:(findlastmember+1)] #Makes a list with names from the file for looping thro
                         wholeline = words[:]
                         break
         return projectfound
         return words
-        return listofnames
         return wholeline
 
     #allowes our user to add a new project into the file
-    def func_add_project():
-        global all_projects
-        all_projects = {}
+    def get_project():
         global project_name
-        global nameofproject
-        project_name, nameofproject = "", ""
-        global members_names
-        members_names = []
+        global number_of_members
         while True:
-            with open('all_projects.txt', 'a+') as fhandle:
-                project_name = input("""
+            project_name = input("""
     Enter the project name: """).lower()
-                if not re.match('[a-zA-Z]', project_name): #checks in the name is valid
-                    print("""
+            if not re.match('[a-zA-Z]', project_name): #checks in the name is valid
+                print("""
     Name must have letters and numbers""")
-                    continue
+                continue
+            else:
+                Project.lookup_project(project_name)
+                if projectfound == False:
+                    project_name = '\n' + project_name
                 else:
-                    Project.lookup_project(project_name)
-                    if projectfound == False:
-                        nameofproject = '\n' + project_name + ','
-                        # fhandle.write(nameofproject)
-                        all_projects[project_name] = {}
-                    else:
-                        print("""
+                    print("""
     Name already exists. Please enter a new name.""")
-                        continue
-                    break
-        return all_projects
-        return nameofproject
+                    continue
+                break
+        while True:
+            number_of_members = input("""
+    Enter the number of team members: """)
+            try:
+                int(number_of_members) > 0
+            except:
+                print("""
+    <ERROR> It must be a number greater than 0""")
+                continue
+            else:
+                break
+        return project_name
+        return number_of_members
 
-    def func_vote_project():
-        new_string = ''
+    def get_votes():
+        all_votes = []
         while True:
             action_v = input("""
     Enter the project name: """).lower()
             Project.lookup_project(action_v)
             if projectfound == False:
-                print(input("""
+                actioninput.action = input("""
     Project not found. Press <ESC> to go back to
-    the Main Menu or press <ENTER> to try again: """))
-                Utils.backtomain()  #will go back to the main menu if project name does not exist so it can be looked up or added
+    the Main Menu or press <ENTER> to try again: """)
                 continue
             else:
-                with open('all_projects.txt', 'a+') as fhandle:
-                    if action_v != words[0] or len(words) < 1:
-                        continue
-                    else:
-                        print(f"""
+                if action_v != words[0] or len(words) < 1:
+                    continue
+                else:
+                    print(f"""
     There are {words[1]} team members""")
-                        members_being_voted = listofnames
-                        names_voters = listofnames
-                        while True:
-                            membersandvotes = []
-                            for nv in names_voters:
-                                total = 0
-                                vote = 0
-                                print(f"""
-            Enter {nv}'s votes, points must add up to 100: """)
-                                for mbv in members_being_voted:
-                                    if nv != mbv:
-                                        vote = input(f"""
-            Enter {nv}'s points for {mbv}:    """)
-                                        try:
-                                            if type(int(vote)) == 'int' :
-                                                continue
-                                        except:
-                                            print("""
+                    members_names = words[2:5]
+                    print(members_names, 'line 93')
+                    members_being_voted = members_names
+                    while True:
+                        for mn in members_names:
+                            member_and_votes = []
+                            total = 0
+                            vote = 0
+                            print(f"""
+            Enter {mn}'s votes, points must add up to 100: """)
+                            for mbv in members_being_voted:
+                                if mn != mbv:
+                                    vote = input(f"""
+            Enter {mn}'s points for {mbv}:    """)
+                                    try:
+                                        if type(int(vote)) == 'int' :
+                                            continue
+                                    except:
+                                        print("""
     <ERROR> Points should be a valid number in between
     0 and 100. Please press  <ENTER>  and start again.""")
-                                            continue
-                                        else:
-                                            total = total + int(vote)
-                                            membersandvotes.extend([mbv, vote])
-                                            continue
-
+                                        continue
+                                    else:
+                                        total = total + int(vote)
+                                        member_and_votes.extend([mbv, vote])
+                                        continue
                             if re.match('[0-9]', vote) and total != 100 :
                                 print("""
     Points must add up to 100. Please start again.""")
                                 break
                             else:
-                                membersandvotes.insert(0, nv)
-                                string = ','.join(membersandvotes)
-                                membersandvotes = []
-                                with open('all_projects.txt', 'r+') as fhandle:
-                                    lines = fhandle.readlines()
-                                    for i, l in enumerate(lines):
-                                        lines[i] = lines[i].strip() + string + ',\n' if l.startswith(action_v) else lines[i]
-                                        # if l.startswith(action_v):
-                                        #     lines[i] = lines[i].strip() + string + ',\n'
-                                        # else:
-                                        #     lines[i] = lines[i]
-                                    fhandle.seek(0)
-                                    for l in lines:
-                                        fhandle.write(l)
+                                member_and_votes.insert(0, mn)
+                                all_votes.extend(member_and_votes)
+                                continue
                         break
             break
+        all_votes = ','.join(all_votes)
+        with open('all_projects.txt', 'r+') as fhandle:
+            lines = fhandle.readlines()
+            for i, l in enumerate(lines):
+                lines[i] = lines[i].strip() + all_votes + ',' if l.startswith(action_v) else lines[i]
+            fhandle.seek(0)
+            for l in lines:
+                fhandle.write(l)
 
         print(input("""
     Press <Enter> to return to the main menu: """));
-
-    def rate_calculator(self, loc1, loc2):
-        vote1 = float(wholeline[loc1]) / (100 - float(wholeline[loc1]))
-        vote2 = float(wholeline[loc2]) / (100 - float(wholeline[loc2]))
-        rate = 1 / (1 + vote1 + vote2)
-        return rate
 
     def func_s():
         action_s = input("""
     Enter the project name: """).lower()
         Project.lookup_project(action_s) #checks if given project name is in the file
         if projectfound == True:
-            first_member = round(Project.rate_calculator(Project, 12, 17), 2)
-            second_member = round(Project.rate_calculator(Project, 7, 19), 2)
-            third_member = round(Project.rate_calculator(Project, 9, 14), 2)
-
+            first_member = round(Project.rate_calculator(12, 17), 2)
+            second_member = round(Project.rate_calculator(7, 19), 2)
+            third_member = round(Project.rate_calculator(9, 14), 2)
 
             print(f"""
         The point allocation based on votes is: """)
@@ -163,30 +161,22 @@ class Project():
         print(input("""
         Press <Enter> to return to the main menu: """, ));
 
+    @classmethod
+    def rate_calculator(cls, loc1, loc2):
+        vote1 = float(wholeline[loc1]) / (100 - float(wholeline[loc1]))
+        vote2 = float(wholeline[loc2]) / (100 - float(wholeline[loc2]))
+        rate = 1 / (1 + vote1 + vote2)
+        return rate
 
 #child class
 class Person(Project):
 
-    def func_add_members():
+    def get_members_names():
         global members_names
-        while True:
-            number_of_members = input("""
-    Enter the number of team members: """)
-            try:
-                int(number_of_members) > 0
-            except:
-                print("""
-    <ERROR> It must be a number greater than 0""")
-                continue
-            else:
-                all_projects[project_name]['Number_of_members'] = number_of_members
-                with open('all_projects.txt', 'a+') as fhandle:
-                    fhandle.write(nameofproject + number_of_members + ',')
-                break
-
+        global number_of_members
+        members_names = []
         number_of_members = int(number_of_members)
         member_number = 0
-        members_names = []
         while number_of_members > 0:
             number_of_members -= 1
             member_number += 1
@@ -199,14 +189,9 @@ class Person(Project):
                     continue
                 else:
                     members_names.append(member_name)
-                    member_name = member_name + ','
-                    with open('all_projects.txt', 'a+') as fhandle:
-                        fhandle.write(member_name)
-                        break
-
-        all_projects[project_name]['Members'] = members_names
-        proj_members = {n : 0 for n in all_projects[project_name]['Members']}
-        all_projects[project_name]['Members'] = proj_members
+                    break
+        members_names = ','.join(members_names)
+        return members_names
 
         print(input("""
     Press <Enter> to return to the main menu: """, ));
