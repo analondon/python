@@ -1,8 +1,6 @@
-import msvcrt as m
-import os
-import re
+import Classes
+from Classes import Project, Person
 import Utils
-from Classes import Person, Project
 
 
 def main_menu():
@@ -16,8 +14,7 @@ def main_menu():
             Show Project     (S)
             Quit             (Q)
 
-        """
-        )
+        """)
 
 #gets input from user, converts into uppercase to be compared with the option in condfun()
 def actioninput():
@@ -28,11 +25,10 @@ def condfun():
         Utils.func_a()
 
     elif actioninput.action == 'c' :
-        Project.func_add_project()
-        Person.func_add_members()
+        Project.set_project()
 
     elif actioninput.action == 'v':
-        Project.func_vote_project()
+        Project.get_votes()
 
     elif actioninput.action == 's':
         Project.func_s()
@@ -44,7 +40,7 @@ def condfun():
         Utils.func_error()
         pass
 
-while True:
+while __name__ == '__main__':
     main_menu()
     actioninput()
     condfun()
