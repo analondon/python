@@ -1,15 +1,10 @@
-import Classes
-from Classes import Project, Person
+import msvcrt as m
 
 
 #other functions
 def backtomain(): #escape not working
     if m.kbhit() and m.getch()[0] == 27: #not working
-        self.main_menu()
-
-def checkuserinput():
-    #check if input is valid. It will be adaptable according to the use
-    pass
+        Project_Main.main_menu()
 
 def func_error():
     print("""
